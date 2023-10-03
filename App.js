@@ -1,7 +1,13 @@
 import React from 'react';
-import {Text, SafeAreaView} from 'react-native';
+import { Text, SafeAreaView } from 'react-native';
+import Splash from './src/screens/auth/Splash';
+
 
 const App = () => {
-  return <Text>HiHiHiHaa</Text>;
+  return (
+    <SafeAreaView>
+      <Splash/>
+    </SafeAreaView>
+  );
 };
 export default App;
