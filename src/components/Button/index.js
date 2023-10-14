@@ -11,4 +11,4 @@ const Button = ({title, addedStyle, onPress}) => {
     );
 };
 
-export default Button;
+export default React.memo(Button);

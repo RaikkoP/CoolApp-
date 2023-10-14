@@ -27,12 +27,11 @@ export const styles = StyleSheet.create({
         paddingVertical: 30,
     },
     container: {
-        backgroundColor: colors.white,
         padding: 24,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         height: '100%',
         borderWidth: 1,
-    }
-})
+    },
+});
