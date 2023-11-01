@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Splash from './src/screens/auth/Splash';
 import Signup from './src/screens/auth/Signup';
 import Signin from './src/screens/auth/SignIn';
@@ -15,12 +15,13 @@ import CreateListing from './src/screens/app/CreateListing';
 import { Image } from 'react-native';
 import { colors } from './src/utils/colors';
 import ProductDetails from './src/screens/app/ProductDetails';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
-const isSignedIn = true;
+export const UserContext = React.createContext();
 
 const ProfileStack = () => {
   return (
@@ -75,12 +76,23 @@ const Tabs = () => {
 
 
 const App = () => {
+  const isSignedIn = false;
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    (async () => {
+      const accessToken = await AsyncStorage.getItem('auth_token');
+      setUser({accessToken});
+    })();
+  },[]);
+
   return (
     <SafeAreaProvider>
+      <UserContext.Provider value={{user, setUser}}>
       <NavigationContainer theme={theme}>
         <Stack.Navigator>
           {
-            isSignedIn ? (
+            user?.accessToken || isSignedIn ? (
               <>
                 <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
                 <Stack.Screen name="ProductDetails" component={ProductDetails} options={{headerShown: false}}/>
@@ -95,6 +107,7 @@ const App = () => {
           }
         </Stack.Navigator>
       </NavigationContainer>
+      </UserContext.Provider>
     </SafeAreaProvider>
   );
 };
