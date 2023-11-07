@@ -12,6 +12,7 @@ import Favorites from './src/screens/app/Favorites';
 import Profile from './src/screens/app/Profile';
 import { Image } from 'react-native';
 import { colors } from './src/utils/colors';
+import ProductDetails from './src/screens/app/ProductDetails';
 
 const Stack = createNativeStackNavigator();
 
@@ -70,6 +71,7 @@ const App = () => {
             isSignedIn ? (
               <>
                 <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
+                <Stack.Screen name="ProductDetails" component={ProductDetails} options={{headerShown: false}}/>
               </>
             ) : (
               <>
